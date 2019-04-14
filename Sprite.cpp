@@ -6,14 +6,16 @@
 #include "Sprite.h"
 
 Sprite::~Sprite() {
-
+    _window = nullptr;
 }
 
 Sprite::Sprite() {
     _isText = false;
+    _window = nullptr;
 }
 
 Sprite::Sprite(std::string path) {
+    _window = nullptr;
     _isText = false;
     if (!_texture.loadFromFile(path))
         throw std::runtime_error("Could not load texture from file " + path);
@@ -23,10 +25,13 @@ Sprite::Sprite(std::string path) {
 
 Sprite::Sprite(sf::Font &font, std::string text, int size): _text(text, font, size) {
     _isText = true;
-
+    _window = nullptr;
 }
 
 void Sprite::render() {
+    if (_window == nullptr) {
+        throw std::runtime_error("Did you forget to load the window on a Sprite?");
+    }
     if (_isText) {
         _window->draw(_text);
     } else {
@@ -63,4 +68,15 @@ void Sprite::setText(sf::Font &font, std::string text, int fontSize) {
     _text.setFont(_font);
     _text.setString(text);
     _text.setCharacterSize(fontSize);
+}
+
+void Sprite::setFullscreen() {
+    if (_window == nullptr) {
+        throw std::runtime_error("Please set the rendering window before calling setFullscreen");
+    }
+    if (_isText) {
+        throw std::runtime_error("setFullscreen should not be used on text");
+    }
+    _sprite.setScale((float)_window->getSize().x/ _sprite.getLocalBounds().width,
+                     (float)_window->getSize().y/ _sprite.getLocalBounds().height);
 }

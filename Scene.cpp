@@ -12,8 +12,9 @@ Scene::~Scene() {
 
 }
 
-void Scene::addSpriteToScene(std::string name, Sprite *sprite) {
+Sprite *Scene::addSpriteToScene(std::string name, Sprite *sprite) {
     _sprites.emplace(name, sprite);
+    return _sprites.at(name);
 }
 
 Sprite *Scene::getSprite(std::string name) {

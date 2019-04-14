@@ -20,10 +20,13 @@ public:
     void setPosition(float x, float y);
     void updateRect(int x, int y, int width, int height);
     void setText(sf::Font &font, std::string text, int fontSize);
+    void setFullscreen();
     float getX(){return _sprite.getPosition().x;};
     float getY(){return _sprite.getPosition().y;};
+    float getSizeX(){return _sprite.getGlobalBounds().width;};
+    float getSizeY(){return _sprite.getGlobalBounds().height;};
     sf::Sprite *getSprite(){return &_sprite;};
-private:
+protected:
     sf::Texture _texture;
     sf::Sprite _sprite;
     sf::Text _text;

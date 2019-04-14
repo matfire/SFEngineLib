@@ -15,7 +15,7 @@ class Scene {
 public:
     Scene(std::string name);
     ~Scene();
-    void addSpriteToScene(std::string name, Sprite *sprite);
+    Sprite *addSpriteToScene(std::string name, Sprite *sprite);
     void addToRenderOder(Sprite *sprite){_renderOrder.push_back(sprite);};
     void addToRenderOrder(std::string name);
     void render();
