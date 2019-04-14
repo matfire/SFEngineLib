@@ -13,6 +13,8 @@ public:
     ~TestEngine();
     bool onUserUpdate(float elapsedTime) override;
     bool onUserCreate() override;
+private:
+    sf::Font _font;
 };
 
 
