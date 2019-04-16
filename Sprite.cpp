@@ -4,6 +4,7 @@
 
 #include <stdexcept>
 #include "Sprite.h"
+#include "assetManager.h"
 
 Sprite::~Sprite() {
     _window = nullptr;
@@ -14,12 +15,11 @@ Sprite::Sprite() {
     _window = nullptr;
 }
 
-Sprite::Sprite(std::string path) {
+Sprite::Sprite(std::string textureName) {
     _window = nullptr;
     _isText = false;
-    if (!_texture.loadFromFile(path))
-        throw std::runtime_error("Could not load texture from file " + path);
-    _sprite.setTexture(_texture);
+    sf::Texture *texture = assetManager::get().getTexture(textureName);
+    _sprite.setTexture(*texture);
 
 }
 

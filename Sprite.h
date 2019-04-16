@@ -11,7 +11,7 @@
 class Sprite {
 public:
     Sprite();
-    Sprite(std::string path);
+    Sprite(std::string textureName);
     Sprite(sf::Font &font, std::string text, int size);
     ~Sprite();
     virtual void render();

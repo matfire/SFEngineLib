@@ -1,0 +1,28 @@
+//
+// Created by matteo on 16/04/19.
+//
+
+#ifndef SFENGINELIB_ASSETMANAGER_H
+#define SFENGINELIB_ASSETMANAGER_H
+#include <string>
+#include <iostream>
+#include <SFML/Graphics.hpp>
+
+class assetManager {
+public:
+    static assetManager& get()
+    {
+        static assetManager instance;
+        return instance;
+    }
+    assetManager(assetManager const&) = delete;
+    void operator=(assetManager const&) = delete;
+    void loadTexture(std::string name, std::string path);
+    sf::Texture *getTexture(std::string name);
+private:
+    assetManager(){};
+    std::map<std::string, sf::Texture*> _textures;
+};
+
+
+#endif //SFENGINELIB_ASSETMANAGER_H

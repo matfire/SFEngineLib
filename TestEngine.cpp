@@ -3,6 +3,7 @@
 //
 
 #include "TestEngine.h"
+#include "assetManager.h"
 
 TestEngine::TestEngine() : Engine() {
 
@@ -27,17 +28,17 @@ bool TestEngine::onUserUpdate(float elapsedTime) {
     if (fg_trees1->getX() + fg_trees1->getSizeX() < 0) {
         fg_trees1->setPosition(fg_trees1->getSizeX(), 0);
     } else {
-        fg_trees1->move(-10 * elapsedTime / 1000, 0);
+        fg_trees1->move(-20 * elapsedTime / 1000, 0);
     }
     if (fg_trees2->getX() + fg_trees1->getSizeX() < 0) {
         fg_trees2->setPosition(fg_trees1->getSizeX(), 0);
     } else {
-        fg_trees2->move(-10 * elapsedTime / 1000, 0);
+        fg_trees2->move(-20 * elapsedTime / 1000, 0);
     }
     if (fg_trees3->getX() + fg_trees1->getSizeX() < 0) {
         fg_trees3->setPosition(fg_trees1->getSizeX(), 0);
     } else {
-        fg_trees3->move(-10 * elapsedTime / 1000, 0);
+        fg_trees3->move(-20 * elapsedTime / 1000, 0);
     }
 
     //moving background trees
@@ -81,25 +82,32 @@ bool TestEngine::onUserUpdate(float elapsedTime) {
 
 bool TestEngine::onUserCreate() {
 
+    //load assets
+    assetManager::get().loadTexture("parallax-mountain-bg", "../assets/parallax-mountain-bg.png");
+    assetManager::get().loadTexture("parallax-mountain-montain-far", "../assets/parallax-mountain-montain-far.png");
+    assetManager::get().loadTexture("parallax-mountain-mountains", "../assets/parallax-mountain-mountains.png");
+    assetManager::get().loadTexture("parallax-mountain-trees", "../assets/parallax-mountain-trees.png");
+    assetManager::get().loadTexture("parallax-mountain-foreground-trees", "../assets/parallax-mountain-foreground-trees.png");
+
     Scene *scene1;
-    if (!_font.loadFromFile("./emulogic.ttf"))
-        throw std::runtime_error("could not load font");
+//    if (!_font.loadFromFile("./emulogic.ttf"))
+//        throw std::runtime_error("could not load font");
     addScene("scene 1", new Scene("Scene 1"));
     scene1 = getScene("scene 1");
-    scene1->addSpriteToScene("bg", new Sprite("../assets/parallax-mountain-bg.png"));
+    scene1->addSpriteToScene("bg", new Sprite("parallax-mountain-bg"));
 
-    scene1->addSpriteToScene("mountain far1", new Sprite("../assets/parallax-mountain-montain-far.png"))->setWindow(&_window);
-    scene1->addSpriteToScene("mountain far2", new Sprite("../assets/parallax-mountain-montain-far.png"))->setWindow(&_window);
+    scene1->addSpriteToScene("mountain far1", new Sprite("parallax-mountain-montain-far"))->setWindow(&_window);
+    scene1->addSpriteToScene("mountain far2", new Sprite("parallax-mountain-montain-far"))->setWindow(&_window);
 
-    scene1->addSpriteToScene("mountain1", new Sprite("../assets/parallax-mountain-mountains.png"))->setWindow(&_window);
-    scene1->addSpriteToScene("mountain2", new Sprite("../assets/parallax-mountain-mountains.png"))->setWindow(&_window);
+    scene1->addSpriteToScene("mountain1", new Sprite("parallax-mountain-mountains"))->setWindow(&_window);
+    scene1->addSpriteToScene("mountain2", new Sprite("parallax-mountain-mountains"))->setWindow(&_window);
 
-    scene1->addSpriteToScene("trees1", new Sprite("../assets/parallax-mountain-trees.png"))->setWindow(&_window);
-    scene1->addSpriteToScene("trees2", new Sprite("../assets/parallax-mountain-trees.png"))->setWindow(&_window);
+    scene1->addSpriteToScene("trees1", new Sprite("parallax-mountain-trees"))->setWindow(&_window);
+    scene1->addSpriteToScene("trees2", new Sprite("parallax-mountain-trees"))->setWindow(&_window);
 
-    scene1->addSpriteToScene("foreground trees1", new Sprite("../assets/parallax-mountain-foreground-trees.png"))->setWindow(&_window);
-    scene1->addSpriteToScene("foreground trees2", new Sprite("../assets/parallax-mountain-foreground-trees.png"))->setWindow(&_window);
-    scene1->addSpriteToScene("foreground trees3", new Sprite("../assets/parallax-mountain-foreground-trees.png"))->setWindow(&_window);
+    scene1->addSpriteToScene("foreground trees1", new Sprite("parallax-mountain-foreground-trees"))->setWindow(&_window);
+    scene1->addSpriteToScene("foreground trees2", new Sprite("parallax-mountain-foreground-trees"))->setWindow(&_window);
+    scene1->addSpriteToScene("foreground trees3", new Sprite("parallax-mountain-foreground-trees"))->setWindow(&_window);
 
     // add player
     //scene1->addSpriteToScene("player", new Sprite("../assets/player.png"))->setWindow(&_window);
