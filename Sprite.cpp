@@ -23,7 +23,11 @@ Sprite::Sprite(std::string textureName) {
 
 }
 
-Sprite::Sprite(sf::Font &font, std::string text, int size): _text(text, font, size) {
+Sprite::Sprite(std::string fontName, std::string text, int size) {
+    sf::Font *font = assetManager::get().getFont(fontName);
+    _text.setFont(*font);
+    _text.setString(text);
+    _text.setCharacterSize(size);
     _isText = true;
     _window = nullptr;
 }
@@ -79,4 +83,16 @@ void Sprite::setFullscreen() {
     }
     _sprite.setScale((float)_window->getSize().x/ _sprite.getLocalBounds().width,
                      (float)_window->getSize().y/ _sprite.getLocalBounds().height);
+}
+
+float Sprite::getSizeX() {
+    if (_isText)
+        return (_text.getGlobalBounds().width);
+    return _sprite.getTexture()->getSize().x * _sprite.getScale().x;
+}
+
+float Sprite::getSizeY() {
+    if (_isText)
+        return (_text.getGlobalBounds().height);
+    return _sprite.getTexture()->getSize().y * _sprite.getScale().y;
 }

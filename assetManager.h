@@ -18,10 +18,13 @@ public:
     assetManager(assetManager const&) = delete;
     void operator=(assetManager const&) = delete;
     void loadTexture(std::string name, std::string path);
+    void loadFont(std::string name, std::string path);
     sf::Texture *getTexture(std::string name);
+    sf::Font *getFont(std::string name);
 private:
     assetManager(){};
     std::map<std::string, sf::Texture*> _textures;
+    std::map<std::string, sf::Font*> _fonts;
 };
 
 

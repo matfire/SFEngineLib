@@ -88,10 +88,9 @@ bool TestEngine::onUserCreate() {
     assetManager::get().loadTexture("parallax-mountain-mountains", "../assets/parallax-mountain-mountains.png");
     assetManager::get().loadTexture("parallax-mountain-trees", "../assets/parallax-mountain-trees.png");
     assetManager::get().loadTexture("parallax-mountain-foreground-trees", "../assets/parallax-mountain-foreground-trees.png");
+    assetManager::get().loadFont("emulogic", "../assets/emulogic.ttf");
 
     Scene *scene1;
-//    if (!_font.loadFromFile("./emulogic.ttf"))
-//        throw std::runtime_error("could not load font");
     addScene("scene 1", new Scene("Scene 1"));
     scene1 = getScene("scene 1");
     scene1->addSpriteToScene("bg", new Sprite("parallax-mountain-bg"));
@@ -109,6 +108,7 @@ bool TestEngine::onUserCreate() {
     scene1->addSpriteToScene("foreground trees2", new Sprite("parallax-mountain-foreground-trees"))->setWindow(&_window);
     scene1->addSpriteToScene("foreground trees3", new Sprite("parallax-mountain-foreground-trees"))->setWindow(&_window);
 
+    scene1->addSpriteToScene("main text", new Sprite("emulogic", "Welcome to the demo", 30))->setWindow(&_window);
     // add player
     //scene1->addSpriteToScene("player", new Sprite("../assets/player.png"))->setWindow(&_window);
     //Sprite *player = scene1->getSprite("player");
@@ -158,5 +158,10 @@ bool TestEngine::onUserCreate() {
     fg_trees3->setPosition(fg_trees2->getX(), 0);
     scene1->addToRenderOrder("foreground trees3");
     //scene1->addToRenderOrder("player");
+
+    // set title text
+    Sprite *main_text = scene1->getSprite("main text");
+    main_text->setPosition(960 - main_text->getSizeX() / 2, 540);
+    scene1->addToRenderOrder("main text");
     changeScene("scene 1");
 }

@@ -12,7 +12,7 @@ class Sprite {
 public:
     Sprite();
     Sprite(std::string textureName);
-    Sprite(sf::Font &font, std::string text, int size);
+    Sprite(std::string fontName, std::string text, int size);
     ~Sprite();
     virtual void render();
     void setWindow(sf::RenderWindow *window){_window = window;};
@@ -23,8 +23,8 @@ public:
     void setFullscreen();
     float getX(){return _sprite.getPosition().x;};
     float getY(){return _sprite.getPosition().y;};
-    float getSizeX(){return _sprite.getGlobalBounds().width;};
-    float getSizeY(){return _sprite.getGlobalBounds().height;};
+    float getSizeX();
+    float getSizeY();
     sf::Sprite *getSprite(){return &_sprite;};
 protected:
     sf::Texture _texture;
