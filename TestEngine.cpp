@@ -28,41 +28,41 @@ bool TestEngine::onUserUpdate(float elapsedTime) {
     if (fg_trees1->getX() + fg_trees1->getSizeX() < 0) {
         fg_trees1->setPosition(fg_trees1->getSizeX(), 0);
     } else {
-        fg_trees1->move(-20 * elapsedTime / 1000, 0);
+        fg_trees1->move(-10000 * elapsedTime, 0);
     }
     if (fg_trees2->getX() + fg_trees1->getSizeX() < 0) {
         fg_trees2->setPosition(fg_trees1->getSizeX(), 0);
     } else {
-        fg_trees2->move(-20 * elapsedTime / 1000, 0);
+        fg_trees2->move(-10000 * elapsedTime, 0);
     }
     if (fg_trees3->getX() + fg_trees1->getSizeX() < 0) {
         fg_trees3->setPosition(fg_trees1->getSizeX(), 0);
     } else {
-        fg_trees3->move(-20 * elapsedTime / 1000, 0);
+        fg_trees3->move(-10000 * elapsedTime, 0);
     }
 
     //moving background trees
     if (trees1->getX() + trees1->getSizeX() < 0) {
         trees1->setPosition(trees1->getSizeX(), 0);
     } else {
-        trees1->move(-5 * elapsedTime / 1000, 0);
+        trees1->move(-500 * elapsedTime, 0);
     }
     if (trees2->getX() + trees2->getSizeX() < 0) {
         trees2->setPosition(trees2->getSizeX(), 0);
     } else {
-        trees2->move(-5 * elapsedTime / 1000, 0);
+        trees2->move(-500 * elapsedTime, 0);
     }
 
     //moving foreground mountains
     if (mountain1->getX() + mountain1->getSizeX() < 0) {
         mountain1->setPosition(mountain1->getSizeX(), 0);
     } else {
-        mountain1->move(-0.2 * elapsedTime / 1000, 0);
+        mountain1->move(-200 * elapsedTime, 0);
     }
     if (mountain2->getX() + mountain2->getSizeX() < 0) {
         mountain2->setPosition(mountain1->getSizeX(), 0);
     } else {
-        mountain2->move(-0.2 * elapsedTime / 1000, 0);
+        mountain2->move(-200 * elapsedTime, 0);
     }
 
 
@@ -70,12 +70,12 @@ bool TestEngine::onUserUpdate(float elapsedTime) {
     if (mountain_fair1->getX() + mountain_fair1->getSizeX() < 0) {
         mountain_fair1->setPosition(mountain_fair1->getSizeX(), 0);
     } else {
-        mountain_fair1->move(-0.02 * elapsedTime / 1000, 0);
+        mountain_fair1->move(-100 * elapsedTime, 0);
     }
     if (mountain_fair2->getX() + mountain_fair2->getSizeX() < 0) {
         mountain_fair2->setPosition(mountain_fair2->getSizeX(), 0);
     } else {
-        mountain_fair2->move(-0.02 * elapsedTime / 1000, 0);
+        mountain_fair2->move(-100 * elapsedTime, 0);
     }
     return true;
 }
@@ -164,4 +164,5 @@ bool TestEngine::onUserCreate() {
     main_text->setPosition(960 - main_text->getSizeX() / 2, 540);
     scene1->addToRenderOrder("main text");
     changeScene("scene 1");
+    return true;
 }

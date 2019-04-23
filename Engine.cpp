@@ -33,7 +33,8 @@ void Engine::run() {
     while (_window.isOpen()) {
         _window.clear();
         handleEvents();
-        onUserUpdate(timer.getElapsedTime().asMicroseconds());
+        sf::Time elapsed = timer.restart();
+        onUserUpdate(elapsed.asSeconds());
         _scenes.at(_currentScene)->render();
         _window.display();
         timer.restart();
