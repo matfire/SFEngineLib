@@ -21,7 +21,7 @@ void Engine::handleEvents() {
     }
 }
 
-void Engine::start(int width, int height, std::string name) {
+void Engine::start(unsigned int width, unsigned int height, std::string name) {
     _width = width;
     _height = height;
     _window.create({width, height}, name);

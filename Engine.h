@@ -14,7 +14,7 @@ class Engine {
 public:
     Engine();
     ~Engine();
-    void start(int width, int height, std::string name);
+    void start(unsigned int width, unsigned int height, std::string name);
     void run();
     void addScene(std::string name, Scene *scene);
     sf::Event getEvent(){return _lastEvent;};
@@ -26,8 +26,8 @@ public:
     Scene *getCurrentScene(){ return _scenes.at(_currentScene);};
 protected:
     sf::RenderWindow _window;
-    int _height;
-    int _width;
+    unsigned int _height;
+    unsigned int _width;
     std::string _currentScene;
     sf::Event _lastEvent;
     std::map<std::string, Scene*> _scenes;

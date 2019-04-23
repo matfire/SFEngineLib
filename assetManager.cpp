@@ -23,7 +23,7 @@ void assetManager::loadFont(std::string name, std::string path) {
 
     if (!newFont.loadFromFile(path))
         throw std::runtime_error("could not load font " + name + " from path " + path);
-    std::cout << "[+]AssetManager:: loaded font" << name << " from path " << path << std::endl;
+    std::cout << "[+]AssetManager: loaded font " << name << " from path " << path << std::endl;
     _fonts.emplace(name, new sf::Font(newFont));
 }
 
@@ -31,6 +31,7 @@ sf::Font *assetManager::getFont(std::string name) {
     std::cout << "[+]AssetManager:: requested font " << name << std::endl;
     if (_fonts.find(name) == _fonts.end())
         throw std::runtime_error("could not find the font " + name + " in the loaded fonts");
+    std::cout << "[+]AssetManager: requested font " << name << std::endl;
     return (_fonts.at(name));
 }
 
