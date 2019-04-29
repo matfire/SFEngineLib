@@ -26,6 +26,7 @@ public:
     float getSizeX();
     float getSizeY();
     sf::Sprite *getSprite(){return &_sprite;};
+    bool collision(Sprite *sprite);
 protected:
     sf::Texture _texture;
     sf::Sprite _sprite;

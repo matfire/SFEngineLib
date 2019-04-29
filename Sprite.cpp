@@ -96,3 +96,7 @@ float Sprite::getSizeY() {
         return (_text.getGlobalBounds().height);
     return _sprite.getTexture()->getSize().y * _sprite.getScale().y;
 }
+
+bool Sprite::collision(Sprite *sprite) {
+    return _sprite.getGlobalBounds().intersects(sprite->getSprite()->getGlobalBounds());
+}

@@ -3,7 +3,7 @@
 //
 
 #include "Engine.h"
-
+#include "assetManager.h"
 
 Engine::Engine() {
     _height = 0;
@@ -11,7 +11,6 @@ Engine::Engine() {
 }
 
 Engine::~Engine() {
-
 }
 
 void Engine::handleEvents() {
