@@ -13,12 +13,15 @@ Sprite::~Sprite() {
 Sprite::Sprite() {
     _isText = false;
     _window = nullptr;
+    _parallax = false;
 }
 
 Sprite::Sprite(std::string textureName) {
     _window = nullptr;
     _isText = false;
+    _parallax = false;
     sf::Texture *texture = assetManager::get().getTexture(textureName);
+    _texture = *texture;
     _sprite.setTexture(*texture);
 
 }
@@ -30,6 +33,7 @@ Sprite::Sprite(std::string fontName, std::string text, int size) {
     _text.setCharacterSize(size);
     _isText = true;
     _window = nullptr;
+    _parallax = false;
 }
 
 void Sprite::render() {
@@ -38,6 +42,11 @@ void Sprite::render() {
     }
     if (_isText) {
         _window->draw(_text);
+    } else if (_parallax) {
+        _window->draw(_sprite);
+        for (auto a: _paras) {
+            _window->draw(a);
+        }
     } else {
         _window->draw(_sprite);
     }
@@ -46,6 +55,18 @@ void Sprite::render() {
 void Sprite::move(float x, float y) {
     if (_isText) {
         _text.move({x, y});
+    } else if (_parallax) {
+        _sprite.move({x, y});
+        if (_sprite.getPosition().x + getSizeX() < 0) {
+            _sprite.setPosition(getSizeX(), 0);
+        }
+        for (int i = 0; i < _paras.size(); i++) {
+            _paras[i].move({x, y});
+            if (_paras[i].getPosition().x + getSizeX() < 0) {
+                _paras[i].setPosition(getSizeX(), _sprite.getPosition().y);
+            }
+        }
+
     } else
         _sprite.move({x, y});
 }
@@ -88,7 +109,7 @@ void Sprite::setFullscreen() {
 float Sprite::getSizeX() {
     if (_isText)
         return (_text.getGlobalBounds().width);
-    return _sprite.getTexture()->getSize().x * _sprite.getScale().x;
+    return _sprite.getTexture()->getSize().x * _sprite.getScale().x - 10;
 }
 
 float Sprite::getSizeY() {
@@ -99,4 +120,17 @@ float Sprite::getSizeY() {
 
 bool Sprite::collision(Sprite *sprite) {
     return _sprite.getGlobalBounds().intersects(sprite->getSprite()->getGlobalBounds());
+}
+
+void Sprite::makeParallax(int nb) {
+    if (_window == nullptr)
+        throw std::runtime_error("Please set the rendering window before calling makeParallax");
+    _parallax = true;
+    for (int i = 0; i < nb; i++) {
+        sf::Sprite newSprite;
+        newSprite.setTexture(_texture);
+        newSprite.setPosition(_sprite.getPosition().x + getSizeX() * (i + 1), 0);
+        newSprite.setScale(_sprite.getScale());
+        _paras.push_back(newSprite);
+    }
 }
