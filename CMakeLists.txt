@@ -4,8 +4,5 @@ project(SFEngineLib)
 set(CMAKE_CXX_STANDARD 14)
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
-add_executable(Test main.cpp Engine.cpp Engine.h Sprite.cpp Sprite.h Scene.cpp Scene.h main.h TestEngine.cpp TestEngine.h assetManager.cpp assetManager.h)
-target_link_libraries(Test sfml-graphics sfml-audio)
-
-#add_library(SFEngineLib SHARED Engine.cpp Engine.h Sprite.cpp Sprite.h Scene.cpp Scene.h)
-#target_link_libraries(SFEngineLib sfml-graphics sfml-audio)
+add_executable(DuckDuckDie main.cpp Engine.cpp Engine.h Sprite.cpp Sprite.h Scene.cpp Scene.h main.h DuckDuckDie.cpp DuckDuckDie.h assetManager.cpp assetManager.h Animation.cpp Animation.hpp AnimatedSprite.cpp AnimatedSprite.hpp)
+target_link_libraries(DuckDuckDie sfml-graphics sfml-audio)

@@ -26,6 +26,8 @@ public:
     float getSizeX();
     float getSizeY();
     sf::Sprite *getSprite(){return &_sprite;};
+    bool collision(Sprite *sprite);
+    void makeParallax(int nb);
 protected:
     sf::Texture _texture;
     sf::Sprite _sprite;
@@ -34,6 +36,8 @@ protected:
     sf::IntRect _displayRect;
     sf::RenderWindow *_window;
     bool _isText;
+    bool _parallax;
+    std::vector<sf::Sprite>_paras;
 };
 
 

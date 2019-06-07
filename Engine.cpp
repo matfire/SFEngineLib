@@ -3,7 +3,7 @@
 //
 
 #include "Engine.h"
-
+#include "assetManager.h"
 
 Engine::Engine() {
     _height = 0;
@@ -11,7 +11,6 @@ Engine::Engine() {
 }
 
 Engine::~Engine() {
-
 }
 
 void Engine::handleEvents() {
@@ -29,15 +28,16 @@ void Engine::start(unsigned int width, unsigned int height, std::string name) {
 
 void Engine::run() {
     sf::Clock timer;
+    sf::Time currentTime;
+    sf::Time lastTime;
     onUserCreate();
     while (_window.isOpen()) {
         _window.clear();
         handleEvents();
-        sf::Time elapsed = timer.restart();
-        onUserUpdate(elapsed.asSeconds());
+        onUserUpdate(timer.getElapsedTime().asSeconds());
+        timer.restart();
         _scenes.at(_currentScene)->render();
         _window.display();
-        timer.restart();
     }
 }
 

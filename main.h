@@ -5,6 +5,6 @@
 #ifndef SFENGINE_MAIN_H
 #define SFENGINE_MAIN_H
 
-#include "TestEngine.h"
+#include "DuckDuckDie.h"
 
 #endif //SFENGINE_MAIN_H

@@ -23,6 +23,10 @@ public:
     sf::Font *getFont(std::string name);
 private:
     assetManager(){};
+    ~assetManager(){
+        _textures.clear();
+        _fonts.clear();
+    }
     std::map<std::string, sf::Texture*> _textures;
     std::map<std::string, sf::Font*> _fonts;
 };
