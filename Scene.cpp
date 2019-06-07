@@ -4,20 +4,21 @@
 
 #include "Scene.h"
 
-Scene::Scene(std::string name) {
+Scene::Scene(std::string name, sf::RenderWindow *window) {
     _name = name;
+    _window = window;
 }
 
 Scene::~Scene() {
 
 }
 
-Sprite *Scene::addSpriteToScene(std::string name, Sprite *sprite) {
+AnimatedSprite *Scene::addSpriteToScene(std::string name, AnimatedSprite *sprite) {
     _sprites.emplace(name, sprite);
     return _sprites.at(name);
 }
 
-Sprite *Scene::getSprite(std::string name) {
+AnimatedSprite *Scene::getSprite(std::string name) {
     try {
         _sprites.at(name);
     } catch(...) {
@@ -28,7 +29,7 @@ Sprite *Scene::getSprite(std::string name) {
 
 void Scene::render() {
     for (auto a: _renderOrder) {
-        a->render();
+        _window->draw(*a);
     }
 }
 

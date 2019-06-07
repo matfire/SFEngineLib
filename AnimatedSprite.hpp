@@ -52,15 +52,18 @@ public:
     bool isLooped() const;
     bool isPlaying() const;
     sf::Time getFrameTime() const;
+    float getSpeed() {return _speed;};
     void setFrame(std::size_t newFrame, bool resetTime = true);
 
-private:
+protected:
     const Animation* m_animation;
     sf::Time m_frameTime;
     sf::Time m_currentTime;
     std::size_t m_currentFrame;
     bool m_isPaused;
     bool m_isLooped;
+    float _speed;
+
     const sf::Texture* m_texture;
     sf::Vertex m_vertices[4];
 

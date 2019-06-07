@@ -31,6 +31,7 @@ protected:
     std::string _currentScene;
     sf::Event _lastEvent;
     std::map<std::string, Scene*> _scenes;
+    sf::Clock _timer;
 };
 
 

@@ -10,20 +10,22 @@
 #include <map>
 #include <list>
 #include "Sprite.h"
+#include "AnimatedSprite.hpp"
 
 class Scene {
 public:
-    Scene(std::string name);
+    Scene(std::string name, sf::RenderWindow *window);
     ~Scene();
-    Sprite *addSpriteToScene(std::string name, Sprite *sprite);
-    void addToRenderOder(Sprite *sprite){_renderOrder.push_back(sprite);};
+    AnimatedSprite *addSpriteToScene(std::string name, AnimatedSprite *sprite);
+    void addToRenderOder(AnimatedSprite *sprite){_renderOrder.push_back(sprite);};
     void addToRenderOrder(std::string name);
     void render();
-    Sprite *getSprite(std::string);
+    AnimatedSprite *getSprite(std::string);
 private:
     std::string _name;
-    std::map<std::string, Sprite*> _sprites;
-    std::list<Sprite *> _renderOrder;
+    std::map<std::string, AnimatedSprite*> _sprites;
+    std::list<AnimatedSprite *> _renderOrder;
+    sf::RenderWindow *_window;
 };
 
 

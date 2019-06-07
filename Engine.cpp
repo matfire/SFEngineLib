@@ -27,15 +27,14 @@ void Engine::start(unsigned int width, unsigned int height, std::string name) {
 }
 
 void Engine::run() {
-    sf::Clock timer;
     sf::Time currentTime;
     sf::Time lastTime;
     onUserCreate();
     while (_window.isOpen()) {
         _window.clear();
         handleEvents();
-        onUserUpdate(timer.getElapsedTime().asSeconds());
-        timer.restart();
+        onUserUpdate(_timer.getElapsedTime().asSeconds());
+        _timer.restart();
         _scenes.at(_currentScene)->render();
         _window.display();
     }

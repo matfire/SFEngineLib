@@ -7,6 +7,8 @@
 
 
 #include <SFML/Graphics.hpp>
+#include "Animation.hpp"
+#include "AnimatedSprite.hpp"
 
 class Sprite {
 public:
