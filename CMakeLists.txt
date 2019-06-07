@@ -3,6 +3,6 @@ project(SFEngineLib)
 
 set(CMAKE_CXX_STANDARD 14)
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
-
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -g")
 add_executable(DuckDuckDie main.cpp Engine.cpp Engine.h Sprite.cpp Sprite.h Scene.cpp Scene.h main.h DuckDuckDie.cpp DuckDuckDie.h assetManager.cpp assetManager.h Animation.cpp Animation.hpp AnimatedSprite.cpp AnimatedSprite.hpp)
 target_link_libraries(DuckDuckDie sfml-graphics sfml-audio)

@@ -12,13 +12,17 @@ class DuckEngine: public Engine {
 		~DuckEngine();
 		bool onUserUpdate(float elapsedTime) override;
 		bool onUserCreate() override;
+	private:
+		int _level;
+		std::list<AnimatedSprite *> _normalDucks;
+		std::list<AnimatedSprite *> _hardDucks;
 
 };
 
 class NormalDuck: public AnimatedSprite {
 	public:
 		NormalDuck() : AnimatedSprite(sf::seconds(0.2), false, true) {
-			_speed = 50;
+			_speed = 5;
 			_flyingAnimation.setSpriteSheet(*assetManager::get().getTexture("normal duck"));
 			_flyingAnimation.addFrame(sf::IntRect(0, 0, 110, 110));
 			_flyingAnimation.addFrame(sf::IntRect(110, 0, 110, 110));
@@ -34,7 +38,7 @@ class NormalDuck: public AnimatedSprite {
 class HardDuck: public AnimatedSprite {
 	public:
 		HardDuck(): AnimatedSprite(sf::seconds(0.1), false, true) {
-			_speed = 80;
+			_speed = 8;
 			_flyingAnimation.setSpriteSheet(*assetManager::get().getTexture("hard duck"));
 			_flyingAnimation.addFrame(sf::IntRect(0, 0, 110, 110));
 			_flyingAnimation.addFrame(sf::IntRect(110, 0, 110, 110));
