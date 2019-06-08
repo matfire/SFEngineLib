@@ -61,12 +61,12 @@ bool DuckEngine::onUserUpdate(float elapsedTime) {
 			sf::Vector2i mousePosition = sf::Mouse::getPosition();
 			if (mousePosition.x <= a->getSprite()->getPosition().x + a->getSprite()->getTextureRect().width && mousePosition.x >= a->getSprite()->getPosition().x) {
 				if (mousePosition.y <= a->getSprite()->getPosition().y + a->getSprite()->getTextureRect().height && mousePosition.y >= a->getSprite()->getPosition().y) {
-					a->setPosition(0, int(a->getY()) % 100);
+					a->setPosition(-a->getSprite()->getTextureRect().width, int(a->getX()) % 100);
 				}
 			}
 		}
 		a->move(movement * a->getSpeed() * elapsedTime);
-		if (a->getX() >= _window.getSize().x) {
+		if (a->getSprite()->getPosition().x >= _window.getSize().x) {
 			a->setPosition(0, a->getY() + int(a->getY()) % 100);
 		}
 		a->update(_timer.getElapsedTime());
