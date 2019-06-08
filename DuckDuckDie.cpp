@@ -20,7 +20,7 @@ bool DuckEngine::onUserCreate() {
 
 	changeScene("main");
 	Scene *main = getScene("main");
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 1; i++) {
 		_normalDucks.push_back(new NormalDuck());
 		_hardDucks.push_back(new HardDuck());
 	}
@@ -53,17 +53,22 @@ bool DuckEngine::onUserUpdate(float elapsedTime) {
 	sf::Vector2f movement = {20, 0};
 	// AnimatedSprite *duck1 = getCurrentScene()->getSprite("duck1");
 	// AnimatedSprite *duck2 = getCurrentScene()->getSprite("duck2");
-	if (_lastEvent.type == sf::Event::MouseButtonReleased && _lastEvent.mouseButton.button == sf::Mouse::Left) {
-		sf::Vector2i mousePosition = sf::Mouse::getPosition();
-		std::cout << "left click at " << mousePosition.x << " " << mousePosition.y << std::endl;
-		for (auto a: _normalDucks) {
-			if (a->getSprite()->getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))) {
-				a->setPosition(0,0);
+	bool clicked = false;
+	for (auto a: _normalDucks) {
+		if (_lastEvent.type == sf::Event::MouseButtonReleased && _lastEvent.mouseButton.button == sf::Mouse::Left && !clicked) {
+			std::cout << "Sprite in position " << a->getSprite()->getPosition().x << " " << a->getSprite()->getPosition().y << std::endl;
+			clicked = true;
+			sf::Vector2i mousePosition = sf::Mouse::getPosition();
+			if (mousePosition.x <= a->getSprite()->getPosition().x + a->getSprite()->getTextureRect().width && mousePosition.x >= a->getSprite()->getPosition().x) {
+				if (mousePosition.y <= a->getSprite()->getPosition().y + a->getSprite()->getTextureRect().height && mousePosition.y >= a->getSprite()->getPosition().y) {
+					a->setPosition(0, int(a->getY()) % 100);
+				}
 			}
 		}
-	}
-	for (auto a: _normalDucks) {
 		a->move(movement * a->getSpeed() * elapsedTime);
+		if (a->getX() >= _window.getSize().x) {
+			a->setPosition(0, a->getY() + int(a->getY()) % 100);
+		}
 		a->update(_timer.getElapsedTime());
 	}
 	// duck1->move(movement * duck1->getSpeed() * elapsedTime);
