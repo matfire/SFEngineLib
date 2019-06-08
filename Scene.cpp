@@ -13,12 +13,12 @@ Scene::~Scene() {
 
 }
 
-AnimatedSprite *Scene::addSpriteToScene(std::string name, AnimatedSprite *sprite) {
+Sprite *Scene::addSpriteToScene(std::string name, Sprite *sprite) {
     _sprites.emplace(name, sprite);
     return _sprites.at(name);
 }
 
-AnimatedSprite *Scene::getSprite(std::string name) {
+Sprite *Scene::getSprite(std::string name) {
     try {
         _sprites.at(name);
     } catch(...) {
@@ -29,7 +29,7 @@ AnimatedSprite *Scene::getSprite(std::string name) {
 
 void Scene::render() {
     for (auto a: _renderOrder) {
-        _window->draw(*a);
+        a->render();
     }
 }
 

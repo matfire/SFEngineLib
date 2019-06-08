@@ -14,15 +14,18 @@ class DuckEngine: public Engine {
 		bool onUserCreate() override;
 	private:
 		int _level;
-		std::list<AnimatedSprite *> _normalDucks;
-		std::list<AnimatedSprite *> _hardDucks;
+		std::list<Sprite *> _normalDucks;
+		std::list<Sprite *> _hardDucks;
+		sf::Text _score;
+		sf::Font _font;
 
 };
 
-class NormalDuck: public AnimatedSprite {
+class NormalDuck: public Sprite {
 	public:
-		NormalDuck() : AnimatedSprite(sf::seconds(0.2), false, true) {
+		NormalDuck() : Sprite("normal duck") {
 			_speed = 5;
+			setInterval(sf::seconds(0.2));
 			_flyingAnimation.setSpriteSheet(*assetManager::get().getTexture("normal duck"));
 			_flyingAnimation.addFrame(sf::IntRect(0, 0, 110, 110));
 			_flyingAnimation.addFrame(sf::IntRect(110, 0, 110, 110));
@@ -31,14 +34,15 @@ class NormalDuck: public AnimatedSprite {
 		};
 		~NormalDuck(){};
 	private:
-		Animation _flyingAnimation;
+	Animation _flyingAnimation;
 
 };
 
-class HardDuck: public AnimatedSprite {
+class HardDuck: public Sprite {
 	public:
-		HardDuck(): AnimatedSprite(sf::seconds(0.1), false, true) {
+		HardDuck(): Sprite("hard duck") {
 			_speed = 8;
+			setInterval(sf::seconds(0.1));
 			_flyingAnimation.setSpriteSheet(*assetManager::get().getTexture("hard duck"));
 			_flyingAnimation.addFrame(sf::IntRect(0, 0, 110, 110));
 			_flyingAnimation.addFrame(sf::IntRect(110, 0, 110, 110));

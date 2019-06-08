@@ -24,16 +24,14 @@ bool DuckEngine::onUserCreate() {
 		_normalDucks.push_back(new NormalDuck());
 		_hardDucks.push_back(new HardDuck());
 	}
-	Animation bg_animation;
-	bg_animation.setSpriteSheet(*assetManager::get().getTexture("bg"));
-	sf::Vector2u bg_size = bg_animation.getSpriteSheet()->getSize();
-	bg_animation.addFrame(sf::IntRect(0, 0,bg_size.x,bg_size.y));
-	AnimatedSprite *bg = new AnimatedSprite(sf::seconds(0.2), true, false);
-	bg->setAnimation(bg_animation);
+	Sprite *bg = new Sprite("bg");
+	bg->setWindow(&_window);
+	bg->setFullscreen();
 	main->addSpriteToScene("bg", bg);
 	main->addToRenderOrder("bg");
 	for (auto a: _normalDucks) {
-		a->setPosition({100 + offset, 0 + distr(eng)});
+		a->setWindow(&_window);
+		a->setPosition(100 + offset, 0 + distr(eng));
 		offset += 110;
 		main->addSpriteToScene("normal duck" + offset, a);
 		main->addToRenderOrder("normal duck" + offset);
@@ -55,7 +53,15 @@ bool DuckEngine::onUserUpdate(float elapsedTime) {
 	sf::Vector2f movement = {20, 0};
 	// AnimatedSprite *duck1 = getCurrentScene()->getSprite("duck1");
 	// AnimatedSprite *duck2 = getCurrentScene()->getSprite("duck2");
-
+	if (_lastEvent.type == sf::Event::MouseButtonReleased && _lastEvent.mouseButton.button == sf::Mouse::Left) {
+		sf::Vector2i mousePosition = sf::Mouse::getPosition();
+		std::cout << "left click at " << mousePosition.x << " " << mousePosition.y << std::endl;
+		for (auto a: _normalDucks) {
+			if (a->getSprite()->getGlobalBounds().contains(sf::Vector2f(mousePosition.x, mousePosition.y))) {
+				a->setPosition(0,0);
+			}
+		}
+	}
 	for (auto a: _normalDucks) {
 		a->move(movement * a->getSpeed() * elapsedTime);
 		a->update(_timer.getElapsedTime());

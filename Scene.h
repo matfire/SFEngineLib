@@ -12,21 +12,29 @@
 #include "Sprite.h"
 #include "AnimatedSprite.hpp"
 
+
+
+
+// class WrapperSprite: public sf::Drawable, public sf::Transformable {
+
+// }
+
 class Scene {
 public:
     Scene(std::string name, sf::RenderWindow *window);
     ~Scene();
-    AnimatedSprite *addSpriteToScene(std::string name, AnimatedSprite *sprite);
-    void addToRenderOder(AnimatedSprite *sprite){_renderOrder.push_back(sprite);};
+    Sprite *addSpriteToScene(std::string name, Sprite *sprite);
+    void addToRenderOder(Sprite *sprite){_renderOrder.push_back(sprite);};
     void addToRenderOrder(std::string name);
     void render();
-    AnimatedSprite *getSprite(std::string);
+    Sprite *getSprite(std::string);
 private:
     std::string _name;
-    std::map<std::string, AnimatedSprite*> _sprites;
-    std::list<AnimatedSprite *> _renderOrder;
+    std::map<std::string, Sprite*> _sprites;
+    std::list<Sprite *> _renderOrder;
     sf::RenderWindow *_window;
 };
 
 
 #endif //SFENGINE_SCENE_H
+ 
